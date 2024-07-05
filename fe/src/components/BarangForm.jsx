@@ -16,7 +16,7 @@ const BarangForm = () => {
       })
       setRincianBarang(rincian);
     } catch (error) {
-      setRincianBarang('Barang tidak ditemukan')
+      setRincianBarang('')
     }
   };
 

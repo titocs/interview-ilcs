@@ -1,6 +1,5 @@
-// src/App.js
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent, Container, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Card, Typography } from '@mui/material';
 import { MainApp } from './components/MainApp';
 import BackgroundImage from './assets/background-image.webp'
 import Loader from './components/Loader';

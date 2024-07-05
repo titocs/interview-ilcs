@@ -1,4 +1,3 @@
-// Loader.js
 import { LinearProgress, Typography } from '@mui/joy';
 
 const Loader = () => {
