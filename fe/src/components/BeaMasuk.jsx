@@ -6,7 +6,8 @@ import { getBeaMasuk } from "../api/bea-masuk"
 const BeaMasuk = () => {
   const { hs_code } = useKodeBarangStore();
   const [beaMasuk, setBeaMasuk] = useState(0);
-  const [harga, setHarga] = useState(0)
+  const [harga, setHarga] = useState(0);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if(hs_code){
@@ -32,11 +33,15 @@ const BeaMasuk = () => {
     setHarga(value);
   }
 
-  console.log(harga)
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   const calculateFinalPrice = () => {
-    // if (typeof harga !== 'number' || typeof beaMasuk !== 'number') {
-    //   throw new Error('Harga dan persen harus berupa angka.');
-    // }
     return harga * (beaMasuk / 100);
   }
 
@@ -44,16 +49,20 @@ const BeaMasuk = () => {
     <div className="py-3">
       <div className="mb-5 flex gap-3 px-10">
         <Typography className="basis-1/4 !font-PT-Sans" >Harga :</Typography>
-        <Input 
-          className="block basis-3/4 flex-grow" 
-          type="number" 
-          placeholder="Harga" 
-          slotProps={{
-            input: {
-              min: 0
-            }
-          }}
-          onChange={handleChangeHarga}/>
+        <div className="basis-3/4 flex-grow relative">
+          <Input 
+            className="!pl-8" 
+            type="number" 
+            slotProps={{
+              input: {
+                min: 0
+              }
+            }}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={handleChangeHarga}/>
+            {isFocused && <div className="absolute left-2 top-[5px] text-black">Rp.</div>}
+        </div>
       </div>
 
       <div  className="mb-5 flex gap-3 px-10">
@@ -66,7 +75,6 @@ const BeaMasuk = () => {
           <Typography variant="plain" className="!font-PT-Sans">Harga Final : </Typography>
           <Typography className="font-semibold !text-xl !font-PT-Sans">
             {
-              // kalo belom ada, pake -
               calculateFinalPrice() === 0 ? '-' : `Rp.${calculateFinalPrice()},-`
             }
           </Typography>
