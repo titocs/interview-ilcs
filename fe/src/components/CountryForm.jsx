@@ -1,4 +1,3 @@
-// import { Autocomplete, TextField, Typography } from "@mui/material"
 import { useState } from "react"
 import { getCountry } from "../api/country";
 import { useCountryStore } from "../stores/store";
@@ -20,6 +19,8 @@ const CountryForm = () => {
       } finally {
         setLoading(false);
       }
+    } else {
+      setListCountries([]);
     }
   };
 

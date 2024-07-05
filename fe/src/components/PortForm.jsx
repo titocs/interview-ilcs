@@ -23,6 +23,8 @@ const PortForm = () => {
       } finally {
         setLoading(false);
       }
+    } else {
+      setListPort([]);
     }
   };
 
