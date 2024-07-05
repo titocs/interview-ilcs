@@ -1,10 +1,23 @@
 // src/App.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Container, Typography } from '@mui/material';
 import { MainApp } from './components/MainApp';
 import BackgroundImage from './assets/background-image.webp'
+import Loader from './components/Loader';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000)
+  }, []);
+
+  if(loading) {
+    return <Loader />
+  }
+
   return (
     <div className='!w-full h-dvh flex flex-col justify-center items-center' style={{
       backgroundImage: `url(${BackgroundImage})`,
