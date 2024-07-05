@@ -6,7 +6,7 @@ import { getBeaMasuk } from "../api/bea-masuk";
 const BeaMasuk = () => {
   const { hs_code } = useKodeBarangStore();
   const [beaMasuk, setBeaMasuk] = useState(0);
-  const [harga, setHarga] = useState('');
+  const [harga, setHarga] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const BeaMasuk = () => {
           <Input 
             className="!pl-8" 
             type="number" 
-            value={harga}
+            value={harga === 0 ? '' : harga}
             slotProps={{
               input: {
                 min: 0,
