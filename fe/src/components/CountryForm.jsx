@@ -6,15 +6,19 @@ import { Autocomplete, TextField, Typography } from "@mui/joy";
 
 const CountryForm = () => {
   const [listCountries, setListCountries] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { selectCountry } = useCountryStore();
   
   const handleInputChange = async (event, value) => {
     if (value.length >= 3) {
+      setLoading(true);
       try {
         const data = await getCountry(value);
         setListCountries(data.data);
       } catch (error) {
         setListCountries([])
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -32,6 +36,8 @@ const CountryForm = () => {
       <Typography variant="plain" className="basis-1/4 !font-PT-Sans">Negara :</Typography>
       <div className="flex-grow basis-3/4" >
         <Autocomplete
+          loading={loading}
+          loadingText="Sedang memuat..."
           className="w-full !font-PT-Sans"
           options={listCountries}
           placeholder="Negara"
